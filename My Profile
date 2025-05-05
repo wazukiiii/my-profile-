@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #5a67d8;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem;
+      z-index: 100;
+      border-bottom: 2px solid #eaeaea;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .logo {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+    }
+
+    .logo img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin-left: auto;
+    }
+
+    .nav-link {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #333;
+      text-transform: uppercase;
+      padding: 0.5rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: #5a67d8;
+      transform: translateY(-5px);
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #5a67d8;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    header.hero {
+      background: 
+        linear-gradient(to right, rgba(88, 104, 208, 0.85), rgba(144, 85, 194, 0.85)),
+        url('https://i.postimg.cc/d1KNz1ns/leee.gif') no-repeat center center / cover;
+      color: #fff;
+      text-align: center;
+      padding: 8rem 2rem;
+      border-bottom: 2px solid #dcdcdc;
+      position: relative;
+      z-index: 1;
+    }
+
+    header.hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: -1;
+    }
+
+    header.hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    header.hero p {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: #e0e0ff;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.85rem 1.75rem;
+      background: #6b46c1;
+      color: white;
+      border-radius: 6px;
+      margin-top: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .button:hover {
+      background: #553c9a;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 15px rgba(107, 70, 193, 0.3);
+    }
+
+    .section {
+      padding: 3rem 2rem;
+      background-color: #fff;
+      margin: 2rem 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #444;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 1rem;
+    }
+
+    .contact p {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f4f7fc;
+      font-size: 0.9rem;
+      border-top: 2px solid #eaeaea;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    .fade-in.delay-1 {
+      animation-delay: 0.5s;
+    }
+
+    .fade-in.delay-2 {
+      animation-delay: 1s;
+    }
+
+    .slide-in {
+      opacity: 0;
+      transform: translateX(-50px);
+      animation: slideIn 1s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .skills ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skills li {
+      background-color: #f4f7fc;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .about img {
+      max-width: 200px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <img src="https://i.postimg.cc/k5bL0Wyt/7.jpg" alt="Logo" />
+      </div>
+      <ul>
+        <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+        <li><a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a></li>
+        <li><a href="#achievements" class="nav-link"><i class="fas fa-trophy"></i> Achievements</a></li>
+        <li><a href="#skills" class="nav-link"><i class="fas fa-cogs"></i> Skills</a></li>
+        <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <h1 class="fade-in">KEAT HONGLEE</h1>
+      <p class="fade-in delay-1">Full Stack Developer & UI/UX Designer</p>
+      <a href="#contact" class="button fade-in delay-2">Contact Me</a>
+    </div>
+  </header>
+
+  <section id="about" class="section about">
+    <div class="container slide-in">
+      <h2>About Me</h2>
+      <img src="https://i.postimg.cc/63MW3D8v/tst-small-845x845-pad-1000x1000-f8f8f8.jpg" alt="About Me Image">
+      <p>
+        I am a full-stack developer with a passion for creating interactive, scalable, and maintainable web applications. I work with technologies like JavaScript, React, Node.js, and Python. I'm also passionate about UI/UX design and building interfaces that prioritize usability.
+      </p>
+    </div>
+  </section>
+
+  <section id="experience" class="section experience">
+    <div class="container slide-in">
+      <h2>Work Experience</h2>
+      <ul>
+        <li>
+          <strong>Full Stack Developer</strong> at Poseidon Company <br />
+          <em>2022 – Present</em><br />
+          <strong>Front-End Development:</strong>
+          <ul>
+            <li>Spearheaded the development of responsive, high-performance web interfaces using HTML5, CSS3, JavaScript, and React.js, resulting in a 30% increase in user engagement and a smoother user experience across devices.</li>
+            <li>Engineered dynamic, interactive features, enhancing user retention and interaction by leveraging advanced React.js concepts such as hooks and context.</li>
+            <li>Integrated RESTful APIs and optimized front-end code, reducing load times by 40% through lazy loading, code splitting, and effective state management techniques.</li>
+          </ul>
+          <strong>Back-End Development:</strong>
+          <ul>
+            <li>Architected and developed scalable, high-availability back-end systems using Node.js, Express.js, and Django, improving system performance and reducing server response time by 25%.</li>
+            <li>Designed and maintained robust database architectures (MySQL, PostgreSQL, MongoDB), implementing efficient data models and optimizing query performance for complex data sets.</li>
+            <li>Implemented secure user authentication and authorization using JWT and OAuth, safeguarding sensitive user data and enhancing security.</li>
+          </ul>
+          <strong>DevOps & Collaboration:</strong>
+          <ul>
+            <li>Automated build, test, and deployment pipelines using Git, GitHub Actions, and Jenkins, cutting deployment times by 50% and ensuring smooth, error-free releases.</li>
+            <li>Deployed applications to cloud platforms like AWS and Heroku, maintaining a 99.9% uptime and ensuring scalability for growing user bases.</li>
+            <li>Collaborated seamlessly with cross-functional teams using Agile methodologies, contributing to efficient sprint cycles and successful project deliveries.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>UI/UX Designer</strong> at Studio Poseidon<br />
+          <em>2020 – 2022</em><br />
+          Designed user-friendly interfaces with a focus on clean aesthetics and usability. Created wireframes, prototypes, and high-fidelity mockups for web and mobile platforms.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills" class="section skills">
+    <div class="container fade-in delay-1">
+      <h2>Skills</h2>
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>React, Node.js, Express</li>
+        <li>Python, Django</li>
+        <li>Database Management (MongoDB, PostgreSQL)</li>
+        <li>UI/UX Design (Figma, Adobe XD)</li>
+        <li>Version Control (Git, GitHub)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="achievements" class="section achievements">
+    <div class="container slide-in">
+      <h2>Achievements</h2>
+      <ul>
+        <li>Certified Full-Stack Web Developer – Udemy 2022</li>
+        <li>Developed Over 50 Responsive Websites: Created user-friendly, mobile-responsive websites that improved user engagement by 30% and ensured cross-browser compatibility.</li>
+        <li>Optimized Website Performance: Implemented performance enhancements like image compression and code minification, resulting in a 40% decrease in page load time.</li>
+        <li>Built Custom Web Applications: Developed custom web applications using frameworks like React and Angular, increasing business process efficiency by 25%.</li>
+        <li>Boosted SEO and Conversion Rates: Improved website traffic by 50% through SEO best practices and increased conversion rates with targeted A/B testing and landing page optimization.</li>
+        <li>Successfully Managed High-Traffic Websites: Managed the launch and maintenance of websites with over 1 million monthly visitors, ensuring optimal performance and minimal downtime.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="container fade-in delay-2">
+      <h2>Contact</h2>
+      <p>Email: thatmehonglee@gmail.com</p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">yourprofile</a></p>
+      <p>Portfolio: <a href="#">yourwebsite.com</a></p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 HONGLEE.Dav2
+  </footer>
+
+  <script>
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        const targetRect = target.getBoundingClientRect();
+        const scrollY = window.pageYOffset + targetRect.top;
+        window.scrollTo({
+          top: scrollY,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionBottom = sectionTop + sectionHeight;
+
+        if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionBottom - 100) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === section.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
